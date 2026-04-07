@@ -1,0 +1,56 @@
+body {
+    background-color: white;
+}
+
+.name {
+    color: blue;
+    font-family: 'Aharoni', Arial, sans-serif;
+    font-size: 60px;
+    position: center;
+}
+
+.header{
+    position: center;
+    display: flex;
+    text-align: center;
+    justify-content: center; /* center horizontally */
+    align-items: center;     /* center vertically */
+    height: 100px;
+    background-color: lightgray;
+}
+
+.login{
+    position: center;
+    text-align: center;
+    right: 20px;
+    background-color: rgb(86, 86, 186);
+    color: white;
+    border-radius: 12px;
+    padding: 20px
+}
+
+.label{
+    position: center;
+    color: #d24242;
+    text-align: center;
+    font-size: 40px;
+    text-align: center;
+}
+
+.inputBox {
+    position: center;
+    background-color: white;
+    border-radius: 20px;
+    width: 400px;
+    height: 40px;
+    font-size: 40px;
+    padding: 20px
+}
+
+.submit{
+    position: center;
+    background-color: cyan;
+    color: black;
+    border-radius: 12px;
+    padding: 20px
+}
