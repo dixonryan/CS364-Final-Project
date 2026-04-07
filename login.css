@@ -20,13 +20,14 @@ body {
 }
 
 .login{
-    position: center;
     text-align: center;
     right: 20px;
     background-color: rgb(86, 86, 186);
     color: white;
     border-radius: 12px;
-    padding: 20px
+    padding: 20px;
+    justify-content: center;
+    height: 330px;
 }
 
 .label{
@@ -53,4 +54,14 @@ body {
     color: black;
     border-radius: 12px;
     padding: 20px
+}
+
+.loginButton{
+    position: absolute;
+    background-color: green;
+    color: white;
+    border-radius: 12px;
+    padding: 20px;
+    justify-content: center;
+    transform: translateX(-50%);
 }
