@@ -7,14 +7,16 @@ name {
     font-family: 'Aharoni', Arial, sans-serif;
     font-size: 32px;
     text-align: center;
+    margin-top: 5px;
 }
 
 .header{
     position: relative;
     display: flex;
+    flex-direction: column;
     justify-content: center; /* center horizontally */
     align-items: center;     /* center vertically */
-    height: 100px;
+    height: 120px;
     background-color: lightgray;
 }
 
@@ -35,4 +37,25 @@ name {
     color: white;
     border-radius: 12px;
     padding: 20px
+}
+
+.honorCode{
+    margin-top: 7px;
+    color: black;
+    font-family: "Segoe Print", Arial, sans-serif;
+}
+
+.container {
+    display: flex;
+    width: 100%;
+}
+
+.lookup {
+    flex: 2;   /* takes 2 parts */
+    background-color: lightblue;
+}
+
+.links {
+    flex: 1;   /* takes 1 part */
+    background-color: lightcoral;
 }
