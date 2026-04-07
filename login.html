@@ -3,22 +3,25 @@
 
 <head>
     <title>USAFA Honor Probation Tracker</title>
+    <link rel="stylesheet" href="login.css">
 </head>
 
-
 <body>
-    <h1>USAFA Honor Probation Tracker Login</h1>
-        <form><!--Add action param in form field-->
-            <label for="username">User:</label>
-            <br>
-            <input type="text" id="username" name="username" placeholder="Username">
-            <br>
-            <label for="password">Password:</label>
-            <br>
-            <input type="text" id="password" name="password" placeholder="Username">
-            <br>
-            <input type="submit" value="submit">
-        </form>
+    <div class="header">
+        <p class="name">USAFA Honor Probation Tracker Login</p>
+    </div>
+    <form class="login"><!--Add action param in form field-->
+        <label class="label" for="username">User:</label>
+        <br>
+        <input class="inputBox" type="text" id="username" name="username" placeholder="Username">
+        <br>
+        <label class="label" for="password">Password:</label>
+        <br>
+        <input class="inputBox" type="text" id="password" name="password" placeholder="Password">
+        <br>
+        <br>
+        <input class="submit" type="submit" value="submit">
+    </form>
 
 
 </body>
