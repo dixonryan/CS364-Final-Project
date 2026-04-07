@@ -1,0 +1,28 @@
+body {
+    background-color: white;
+}
+
+name {
+    color: blue;
+    font-family: 'Aharoni', Arial, sans-serif;
+    font-size: 32px;
+    text-align: center;
+}
+
+.header{
+    position: relative;
+    display: flex;
+    justify-content: center; /* center horizontally */
+    align-items: center;     /* center vertically */
+    height: 100px;
+    background-color: lightgray;
+}
+
+.logout{
+    position: absolute;
+    right: 20px;
+    background-color: red;
+    color: white;
+    border-radius: 12px;
+    padding: 20px
+}
