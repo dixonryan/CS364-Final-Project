@@ -17,7 +17,7 @@ name {
     justify-content: center; /* center horizontally */
     align-items: center;     /* center vertically */
     height: 120px;
-    background-color: lightgray;
+    background-color: darkgray;
 }
 
 .logout{
@@ -41,11 +41,67 @@ name {
 }
 
 .lookup {
-    flex: 2;   /* takes 2 parts */
-    background-color: lightblue;
+    flex: 3;   /* takes 2 parts */
+    background-color: white;
+    height: 100vh;
+    padding: 10px;
 }
 
 .links {
     flex: 1;   /* takes 1 part */
-    background-color: lightcoral;
+    background-color: #eeeeee;
+    height: 100vh;
+    border: 1px solid black;
+    padding: 15px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    margin-top: 5px;
+    /*justify-content: center; /* center horizontally */
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    border: 1px solid black;
+    padding: 10px;
+    text-align: left;
+}
+
+th {
+    background-color: lightblue;
+}
+
+.search-container {
+    display: flex;
+    align-items: center; /* vertically aligns everything */
+    gap: 10px;           /* spacing between elements */
+    justify-content: center;
+    height: 55px;
+}
+
+.searchStyle{
+    color: black;
+    font-size: 20px;
+    font-family: Arial, Helvetica, sans-serif;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.orgChartLinks{
+    color: blue;
+    font-size: 25px;
+    justify-content: center;
+}
+
+.addMember{
+    position: absolute;
+    left: 20px;
+    background-color: green;
+    color: white;
+    border-radius: 12px;
+    padding: 20px
 }
