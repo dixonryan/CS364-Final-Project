@@ -20,16 +20,6 @@ name {
     background-color: lightgray;
 }
 
-.headerSmall {
-    position: relative;
-    display: inline-flex;   /* key change */
-    justify-content: center;
-    align-items: center;
-    
-    padding: 10px 20px;     /* adds space around text */
-    background-color: lightgray;
-}
-
 .logout{
     position: absolute;
     right: 20px;
