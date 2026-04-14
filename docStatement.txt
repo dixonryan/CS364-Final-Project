@@ -1,4 +1,5 @@
-C/Ryan: I used ChatGPT to tell me what qualities to use to make what changes. I gave it none of my code, only asked how to do other things
+C/Ryan: I used ChatGPT to tell me what qualities to use to make what changes. 
+I gave it none of my code, only asked how to do other things
 
 C/Thomas: No Help Received
 

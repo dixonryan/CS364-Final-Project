@@ -2,7 +2,7 @@
 <html lang="en">
     <head>
         <title>Add New User</title>
-        <link rel="stylesheet" href="main.css">
+        <link rel="stylesheet" href="addProbate.css">
     </head>
 
 
@@ -12,36 +12,29 @@
         <a href="main.html" class = addMember>Home Page</a>
     </header>
 
-    <h1>Add New Probate</h1>
+    <div class="inputForm">
         <form><!--Add action param in form field-->
-            <label for="ProbateID">ProbateID:</label>
-            <br>
-            <input type="text" id="ProbateID" name="ProbateID" placeholder="########">
-            <br>
-            <label for="probate">Probate Name:</label>
-            <br>
-            <input type="text" id="probate" name="probate" placeholder="First and Last">
-            <br>
-            <label for="start">Start Date:</label>
-            <br>
-            <input type="text" id="start" name="start" placeholder="01/30/26">
-            <br>
-            <label for="end">End Date:</label>
-            <br>
-            <input type="text" id="end" name="end" placeholder="07/30/26">
-            <br>
-            <label for="squad">Squadron:</label>
-            <br>
-            <input type="text" id="squad" name="squad" placeholder="CS-31">
-            <br>
-            <label for="year">Class Year:</label>
-            <br>
-            <input type="text" id="year" name="year" placeholder="2027">
-            <br>
-            <br>
-            <input type="submit" value="Submit">
+            <label for="ProbateID" class = "inputs">ProbateID:</label>
+            <input type="text" id="ProbateID" name="ProbateID" placeholder="########" class = "inputs">
+
+            <label for="probate" class = "inputs">Probate Name:</label>
+            <input type="text" id="probate" name="probate" placeholder="First and Last" class = "inputs">
+            
+            <label for="start" class = "inputs">Start Date:</label>
+            <input type="text" id="start" name="start" placeholder="01/30/26" class = "inputs">
+            
+            <label for="end" class = "inputs">End Date:</label>
+            <input type="text" id="end" name="end" placeholder="07/30/26" class = "inputs">
+            
+            <label for="squad" class = "inputs">Squadron:</label>
+            <input type="text" id="squad" name="squad" placeholder="CS-31" class = "inputs">
+
+            <label for="year" class = "inputs">Class Year:</label>
+            <input type="text" id="year" name="year" placeholder="2027" class = "inputs">
+
+            <input type="submit" value="Submit" class = "submitButton">
         </form>
-    
+    </div>
     
     </body>
 </body>

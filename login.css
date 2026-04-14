@@ -22,7 +22,7 @@ body {
 .login{
     text-align: center;
     right: 20px;
-    background-color: rgb(86, 86, 186);
+    background-color: rgb(111, 111, 202);
     color: white;
     border-radius: 12px;
     padding: 20px;
@@ -32,7 +32,7 @@ body {
 
 .label{
     position: center;
-    color: #d24242;
+    color: black;
     text-align: center;
     font-size: 40px;
     text-align: center;

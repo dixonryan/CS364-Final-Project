@@ -1,0 +1,65 @@
+.inputForm{
+    display: flex;
+    gap: 5px;           /* spacing between elements */
+    justify-content: center;
+    width: 100%;
+    margin: 0 auto;
+    flex-direction: column;
+    align-items: center;
+    padding: 5px;
+    background-color: lightgray;
+}
+
+.inputForm form {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    align-items: flex-start;
+}
+
+.inputs{
+    font-size: 25px;
+    color: black;
+}
+
+.header{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* center horizontally */
+    align-items: center;     /* center vertically */
+    height: 120px;
+    background-color: darkgray;
+}
+
+name {
+    color: blue;
+    font-family: 'Aharoni', Arial, sans-serif;
+    font-size: 32px;
+    text-align: center;
+    margin-top: 5px;
+}
+
+.addMember{
+    position: absolute;
+    left: 20px;
+    background-color: green;
+    color: white;
+    border-radius: 12px;
+    padding: 20px
+}
+
+.submitButton {
+    margin: 0 auto;
+    padding: 10px 20px;
+    background-color: green;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+/* simple hover */
+.submitButton:hover {
+    background-color: darkgreen;
+}
