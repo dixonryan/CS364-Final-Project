@@ -69,9 +69,10 @@ app.post("/users", async (req, res) => {
 
     const res1 = await pool.query('SELECT * FROM staff WHERE password = $1', [password]);
     if (res1.rows.length == 0) return res.status(401).json({error: 'pass incorrect'})
-
+    
   } catch (err) {
     console.error("DB ERROR:", err);
     res.status(500).json({ error: err.message });
   }
+  window.location.href = "main.html";
 });
