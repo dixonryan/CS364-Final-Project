@@ -57,7 +57,7 @@ body {
 }
 
 .loginButton{
-    position: absolute;
+    /*position: absolute;*/
     background-color: green;
     color: white;
     border-radius: 12px;
@@ -67,7 +67,7 @@ body {
     margin-right: 15px;
 }
 .createButton{
-    position: absolute;
+    
     background-color: green;
     color: white;
     border-radius: 12px;
