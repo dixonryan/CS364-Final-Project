@@ -1,19 +1,19 @@
 CREATE DATABASE honor;
 
-\c honor \\
+\c honor;
 
-CREATE TABLE "probate" (
-    "name" character varying(20),
-    "probateid" character varying(9) PRIMARY KEY,
-    "startdate" date,
-    "enddate" date,
-    "squad" character varying(5),
-    "classYear" character varying(5)
-)
+CREATE TABLE probate (
+    name VARCHAR(20),
+    probateid VARCHAR(9),
+    startdate VARCHAR(10),
+    endDate VARCHAR(10),
+    squad VARCHAR(5),
+    classYear VARCHAR(5)
+);
 
-CREATE TABLE "staff" (
-    "name" character varying(20),
-    "staffid" character varying(9),
-    "squad" character varying(5),
-    "admin" BOOLEAN
-)
+CREATE TABLE staff (
+    name VARCHAR(20),
+    staffid VARCHAR(9),
+    squad VARCHAR(5),
+    admin BOOLEAN
+);

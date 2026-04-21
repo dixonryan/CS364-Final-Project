@@ -1,0 +1,3 @@
+TO RUN:
+1. go to backend folder (honor-app) and do "node server.js" to run server
+2. go to http://localhost:3000/addProbate.html

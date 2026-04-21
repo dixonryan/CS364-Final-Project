@@ -1,5 +1,7 @@
-C/Ryan: I used ChatGPT to tell me what qualities to use to make what changes. 
-I gave it none of my code, only asked how to do other things
+C/Ryan: 
+-I used ChatGPT to tell me what qualities to use to make what changes. 
+    I gave it none of my code, only asked how to do other things
+- I used ChatGPT to help me set up my entire backend including NodeJS
 
 C/Thomas: No Help Received
 
