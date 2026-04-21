@@ -4,9 +4,9 @@ CREATE DATABASE honor;
 
 CREATE TABLE "probate" (
     "name" character varying(20),
-    "probateid" character varying(9),
-    "startdate" character varying(10),
-    "endDate" character varying(10),
+    "probateid" character varying(9) PRIMARY KEY,
+    "startdate" date,
+    "enddate" date,
     "squad" character varying(5),
     "classYear" character varying(5)
 )
