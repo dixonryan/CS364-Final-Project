@@ -57,14 +57,13 @@ body {
 }
 
 .loginButton{
-    /*position: absolute;*/
+    position: absolute;
     background-color: green;
     color: white;
     border-radius: 12px;
     padding: 20px;
     justify-content: center;
     transform: translateX(-50%);
-    margin-right: 15px;
 }
 .createButton{
     
