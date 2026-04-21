@@ -10,3 +10,10 @@ CREATE TABLE "probate" (
     "squad" character varying(5),
     "classYear" character varying(5)
 )
+
+CREATE TABLE "staff" (
+    "name" character varying(20),
+    "staffid" character varying(9),
+    "squad" character varying(5),
+    "admin" BOOLEAN
+)
