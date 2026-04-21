@@ -1,7 +1,11 @@
 TO RUN:
 
+IF DB NOT ALREADY BUILT:
 First: CD to where project is on computer
 SECOND: Start db--> psql -U postgres -d honor -f honor.sql
+
+ELSE IF BUILT:
+run "psql -U postgres -d honor"
 
 Then: Run Node Backend
 1. cd in termainl to backend folder (honor-app) and do "node server.js" to run server
