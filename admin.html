@@ -1,16 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <title>USAFA Honor Probation Tracker</title>
-    <link rel="stylesheet" href="login.css">
-</head>
+    <head>
+        <title>Admin Page</title>
+    </head>
 
 <body>
-    <div class="header">
-        <p class="name">USAFA Honor Probation Tracker Login</p>
-    </div>
-    <form id="form" class="login"><!--Add action param in form field-->
+    <form id="displayTable" class="login"><!--Add action param in form field-->
         <label class="label" for="username">User:</label>
         <br>
         <input class="inputBox" type="text" id="username" name="username" placeholder="Username">
@@ -20,9 +15,9 @@
         <input class="inputBox" type="text" id="password" name="password" placeholder="Password">
         <br>
         <br>
-        <input type="submit" value="Submit" class = "loginButton">
+        <a href="main.html" class = loginButton>Login</a>
     </form>
-<a href="createAcc.html" class = createAccButton>Create Account</a>
-
+    
+    </body>
 </body>
 </html>

@@ -65,3 +65,13 @@ body {
     justify-content: center;
     transform: translateX(-50%);
 }
+.createButton{
+    
+    background-color: green;
+    color: white;
+    border-radius: 12px;
+    padding: 20px;
+    justify-content: center;
+    transform: translateX(-50%);
+    margin-left: 15px;
+}
