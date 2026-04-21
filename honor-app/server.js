@@ -57,3 +57,21 @@ app.post("/users", async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 });
+
+app.post("/users", async (req, res) => {
+
+  try {
+    const { username, password } = req.body;
+    if(!username || !password) return res.status(400).json({error: 'must fill all fields'});
+    
+    const result = await pool.query('SELECT * FROM staff WHERE username = $1', [username]);
+    if (result.rows.length == 0) return res.status(401).json({error: 'User incorrect'})
+
+    const res1 = await pool.query('SELECT * FROM staff WHERE password = $1', [password]);
+    if (res1.rows.length == 0) return res.status(401).json({error: 'pass incorrect'})
+
+  } catch (err) {
+    console.error("DB ERROR:", err);
+    res.status(500).json({ error: err.message });
+  }
+});
