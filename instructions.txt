@@ -1,7 +1,9 @@
 TO RUN:
 
-First: Start db--> psql -U postgres -d honor -f honor.sql
+First: CD to where project is on computer
+SECOND: Start db--> psql -U postgres -d honor -f honor.sql
 
+Then: Run Node Backend
 1. cd in termainl to backend folder (honor-app) and do "node server.js" to run server
 2. go to http://localhost:3000/addProbate.html
 
