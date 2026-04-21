@@ -12,8 +12,11 @@ CREATE TABLE probate (
 );
 
 CREATE TABLE staff (
-    name VARCHAR(20),
-    staffid VARCHAR(9),
-    squad VARCHAR(5),
-    admin BOOLEAN
+    --name VARCHAR(20),
+    --staffid VARCHAR(9),
+    --squad VARCHAR(5),
+    --admin BOOLEAN,
+
+    username VARCHAR(20),
+    password VARCHAR(20)
 );

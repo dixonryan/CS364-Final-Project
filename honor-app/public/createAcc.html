@@ -10,7 +10,7 @@
     <div class="header">
         <p class="name">USAFA Honor Probation Tracker Login</p>
     </div>
-    <form class="Create Account"><!--Add action param in form field-->
+    <form id = "createAccountForm" class="Create Account"><!--Add action param in form field-->
         <label class="label" for="username">New User:</label>
         <br>
         <input class="inputBox" type="text" id="username" name="username" placeholder="First and Last Name">
@@ -21,10 +21,37 @@
         <br>
         <label class="label" for="password">Confirm Password:</label>
         <br>
-        <input class="inputBox" type="text" id="password" name="password" placeholder="Password">
+        <input class="inputBox" type="text" id="confirmPassword" name="confirmPassword" placeholder="Password">
         <br>
-        <a href="login.html" class = CreateButton>Create</a>
+        <button type="submit" class="CreateButton">Create</button>
     </form>
+
+
+    
+    <script>
+        document.getElementById("createAccountForm").addEventListener("submit", async (e) => {
+        e.preventDefault();
+
+        const username = document.getElementById("username").value;
+        const password = document.getElementById("password").value;
+
+        const res = await fetch("/users", {
+            method: "POST",
+            headers: {
+            "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+            username,
+            password
+            })
+        });
+
+        const data = await res.json();
+        console.log("Server response:", data);
+
+        window.location.href = "main.html";
+        });
+</script>
 
 
 </body>

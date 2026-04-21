@@ -34,3 +34,26 @@ app.get("/probate", async (req, res) => {
     });
   }
 });
+
+
+app.post("/users", async (req, res) => {
+  console.log("HIT /users");        // 🔍 must show in terminal
+  console.log(req.body);            // 🔍 must show data
+
+  try {
+    const { username, password } = req.body;
+
+    const result = await pool.query(
+      `INSERT INTO staff (username, password)
+       VALUES ($1, $2)
+       RETURNING *`,
+      [username, password]
+    );
+
+    res.json(result.rows[0]);
+
+  } catch (err) {
+    console.error("DB ERROR:", err);
+    res.status(500).json({ error: err.message });
+  }
+});
