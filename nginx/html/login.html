@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>USAFA Honor Probation Tracker</title>
+    <link rel="stylesheet" href="login.css">
+    <script defer src = "login.js"> </script>
+</head>
+
+<body>
+    <div class="header">
+        <p class="name">USAFA Honor Probation Tracker Login</p>
+    </div>
+    <form id="login-form" onsubmit="login(event)"><!--Add action param in form field-->
+        <fieldset>
+        <label for="user_field">Username:</label>
+        <input type="text" id="user_field" name="username" required>
+        <br>
+        <label for="password_field">Password:</label>
+        <input type="password" id="password_field" name="password" required>
+        <br>
+        <button type="submit">Login</button>
+      </fieldset>
+    </form>
+<a href="createAcc.html" class = createAccButton>Create Account</a>
+
+<!-- <script>
+    app.post("/users", async (req, res) => {
+
+  try {
+    const { username, password } = req.body;
+    if(!username || !password) return res.status(400).json({error: 'must fill all fields'});
+    
+    const result = await pool.query('SELECT * FROM staff WHERE username = $1', [username]);
+    if (result.rows.length == 0) return res.status(401).json({error: 'User incorrect'})
+
+    const res1 = await pool.query('SELECT * FROM staff WHERE password = $1', [password]);
+    if (res1.rows.length == 0) return res.status(401).json({error: 'pass incorrect'})
+    
+  } catch (err) {
+    console.error("DB ERROR:", err);
+    res.status(500).json({ error: err.message });
+  }
+  window.location.href = "main.html";
+});
+</script> -->
+
+</body>
+</html>
