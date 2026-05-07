@@ -24,53 +24,100 @@
         <div class="container">
             <div class="lookup">
 
-                <div class = "search-container">
-                    <label for="textLabel" class = "searchStyle">Probate Lookup: </label>
-                    <input type = "text" id="textLabel" name="textLabel" placeholder="Last Name">
-                    <p class="searchStyle">or</p>
-                    <input type = "number" placeholder="Student ID">
-                </div>
+    <div class="search-container">
+        <label class="searchStyle">Last Name: </label>
+        <input type="text" id="nameSearch" placeholder="Last Name">
+        
+        <p class="searchStyle">or</p>
+        
+        <label class="searchStyle">Student ID: </label>
+        <input type="number" id="studentId" placeholder="Student ID">
+        
+        <button onclick="searchProbates()">Search</button>
+        <button onclick="clearSearch()">Clear</button>
+    </div>
 
-                <table>
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Probate ID</th>
-                        <th>Start Date</th>
-                        <th>End Date</th>
-                        <th>Squad</th>
-                        <th>Class Year</th>
-                    </tr>
-                </thead>
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Probate ID</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+                <th>Squad</th>
+                <th>Class Year</th>
+            </tr>
+        </thead>
+        <tbody id="probateBody"></tbody>
+    </table>
 
-                <tbody>
-                    <tr>
-                        <td>John Doe</td>
-                        <td>123456789</td>
-                        <td>2026-04-06</td>
-                        <td>2027-04-06</td>
-                        <td>CS-41</td>
-                        <td>CY-30</td>
-                    </tr>
-                    <tr>
-                        <td>John Smith</td>
-                        <td>987654321</td>
-                        <td>2026-04-06</td>
-                        <td>2027-04-06</td>
-                        <td>CS-42</td>
-                        <td>CY-31</td>
-                    </tr>
-                </tbody>
-                </table>
+    <script>
+    async function searchProbates() {
+        const name = document.getElementById('nameSearch').value.trim();
+        const studentId = document.getElementById('studentId').value.trim();
+        
+        let url = '/api/probates';
+        
+        if (name || studentId) {
+            url += '?';
+            if (name) url += `search=${encodeURIComponent(name)}&`;
+            if (studentId) url += `studentId=${studentId}`;
+        }
 
-            </div>
+        try {
+            console.log('Fetching from:', url);   // Debug
+            
+            const response = await fetch(url);
+            console.log('Response status:', response.status);
+            
+            if (!response.ok) {
+                throw new Error(`HTTP ${response.status}`);
+            }
+            
+            const data = await response.json();
+            console.log('Data received:', data);   // Debug
+            
+            renderTable(data);
+        } catch (error) {
+            console.error('Fetch error:', error);
+            alert('Error loading probates: ' + error.message);
+        }
+    }
 
-            <div class="links">
-                <p class = "orgChartLinks">Wing Staff Info</p>
-                <p class = "orgChartLinks">Group Staff Info</p>
-                <p class = "orgChartLinks">Squad Staff Info</p>
-                <p class = "orgChartLinks">Permanent Party Info</p>
-            </div>
+    function renderTable(rows) {
+        const tbody = document.getElementById('probateBody');
+        tbody.innerHTML = '';
+
+        if (!rows || rows.length === 0) {
+            tbody.innerHTML = `<tr><td colspan="6" style="text-align:center; padding:20px;">No results found</td></tr>`;
+            return;
+        }
+
+        rows.forEach(row => {
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+                <td>${row.name || ''}</td>
+                <td>${row.probateid || ''}</td>
+                <td>${row.startdate ? row.startdate.substring(0,10) : ''}</td>
+                <td>${row.enddate ? row.enddate.substring(0,10) : ''}</td>
+                <td>${row.squad || ''}</td>
+                <td>${row.classyear || ''}</td>
+            `;
+            tbody.appendChild(tr);
+        });
+    }
+
+    function clearSearch() {
+        document.getElementById('nameSearch').value = '';
+        document.getElementById('studentId').value = '';
+        searchProbates();
+    }
+
+    // Auto load when page opens
+    window.onload = searchProbates;
+</script>
+
+</div>
         </div>
 
     </main>

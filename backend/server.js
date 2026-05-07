@@ -34,10 +34,61 @@ app.get('/api/', (req, res) => {
   res.send(`Current API time: ${currentTime}`);
 });
 
+// ======================
+// PROBATE LOOKUP ROUTES
+// ======================
+
+// Search Probates
+app.get('/api/probates', async (req, res) => {
+    const { search, studentId } = req.query;
+
+    try {
+        let queryText = `
+            SELECT name, probateid, startdate, enddate, squad, classyear 
+            FROM probate 
+            WHERE 1=1`;
+        const params = [];
+
+        if (search) {
+            queryText += ` AND name ILIKE $1`;
+            params.push(`%${search}%`);
+        }
+        if (studentId) {
+            queryText += ` AND student_id = $${params.length + 1}`;
+            params.push(parseInt(studentId));
+        }
+
+        queryText += ` ORDER BY name`;
+
+        const result = await pool.query(queryText, params);
+        res.json(result.rows);
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: 'Database error' });
+    }
+});
+
+// Add New Probate (Optional for now)
+app.post('/api/probates', async (req, res) => {
+    const { name, probateid, startdate, enddate, squad, classyear, student_id } = req.body;
+    
+    try {
+        const result = await pool.query(`
+            INSERT INTO probate (name, probateid, startdate, enddate, squad, classyear, student_id)
+            VALUES ($1, $2, $3, $4, $5, $6, $7) 
+            RETURNING *`,
+            [name, probateid, startdate, enddate, squad, classyear, student_id]);
+        
+        res.status(201).json(result.rows[0]);
+    } catch (err) {
+        console.error(err);
+        res.status(400).json({ error: err.message });
+    }
+  });
 
 // app.post("/api/register", auth.register);
 
-const saltRounds = 10;
+//const saltRounds = 10;
 
 
 app.post("/api/register", async (req, res) => {
