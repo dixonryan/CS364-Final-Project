@@ -1,46 +1,72 @@
 <!DOCTYPE html>
-
-<head>
-<script src="script.js"></script>
-</head>
-
 <html lang="en">
-    <head>
-        <title>Add New User</title>
-        <link rel="stylesheet" href="addProbate.css">
-    </head>
-
-
+<head>
+    <meta charset="UTF-8">
+    <title>Add New Probate</title>
+    <link rel="stylesheet" href="addProbate.css">
+</head>
 <body>
     <header class="header">
-        <name>Add New Probate Page</name>
-        <a href="main.html" class = addMember>Home Page</a>
+        <name>Add New Probate</name>
+        <a href="main.html">Home</a>
     </header>
 
     <div class="inputForm">
-        <form><!--Add action param in form field-->
-            <label for="ProbateID" class = "inputs">ProbateID:</label>
-            <input type="text" id="ProbateID" name="ProbateID" placeholder="########" class = "inputs">
+        <form id="addProbateForm">
+            <label for="probateid">Probate ID:</label>
+            <input type="text" id="probateid" placeholder="########" required>
 
-            <label for="probate" class = "inputs">Probate Name:</label>
-            <input type="text" id="probate" name="probate" placeholder="First and Last" class = "inputs">
+            <label for="name">Probate Name:</label>
+            <input type="text" id="name" placeholder="First and Last" required>
             
-            <label for="start" class = "inputs">Start Date:</label>
-            <input type="text" id="start" name="start" placeholder="01/30/26" class = "inputs">
+            <label for="startdate">Start Date:</label>
+            <input type="date" id="startdate" required>
             
-            <label for="end" class = "inputs">End Date:</label>
-            <input type="text" id="end" name="end" placeholder="07/30/26" class = "inputs">
+            <label for="enddate">End Date:</label>
+            <input type="date" id="enddate" required>
             
-            <label for="squad" class = "inputs">Squadron:</label>
-            <input type="text" id="squad" name="squad" placeholder="CS-31" class = "inputs">
+            <label for="squad">Squadron:</label>
+            <input type="text" id="squad" placeholder="CS-31" required>
 
-            <label for="year" class = "inputs">Class Year:</label>
-            <input type="text" id="year" name="year" placeholder="2027" class = "inputs">
+            <label for="classyear">Class Year:</label>
+            <input type="text" id="classyear" placeholder="CY-2027" required>
 
-            <input type="submit" value="Submit" class = "submitButton">
+            <button type="submit">Submit</button>
         </form>
     </div>
-    
-    </body>
+
+    <script>
+        document.getElementById('addProbateForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const data = {
+                name: document.getElementById('name').value.trim(),
+                probateid: document.getElementById('probateid').value.trim(),
+                startdate: document.getElementById('startdate').value,
+                enddate: document.getElementById('enddate').value,
+                squad: document.getElementById('squad').value.trim(),
+                classyear: document.getElementById('classyear').value.trim()
+            };
+
+            try {
+                const response = await fetch('/api/probates', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+
+                if (response.ok) {
+                    alert('✅ Probate added successfully!');
+                    e.target.reset();           // Clear the form
+                } else {
+                    const error = await response.json();
+                    alert('❌ Failed to add probate: ' + (error.error || 'Unknown error'));
+                }
+            } catch (err) {
+                console.error(err);
+                alert('❌ Error connecting to server. Is the backend running?');
+            }
+        });
+    </script>
 </body>
 </html>

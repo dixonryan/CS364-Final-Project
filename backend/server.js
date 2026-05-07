@@ -40,31 +40,72 @@ app.get('/api/', (req, res) => {
 
 // Search Probates
 app.get('/api/probates', async (req, res) => {
+
     const { search, studentId } = req.query;
 
     try {
+
         let queryText = `
-            SELECT name, probateid, startdate, enddate, squad, classyear 
-            FROM probate 
-            WHERE 1=1`;
-        const params = [];
+            SELECT 
+                name,
+                probateid,
+                startdate,
+                enddate,
+                squad,
+                classyear
+            FROM probate
+        `;
 
+        let conditions = [];
+        let params = [];
+
+        // Search by name
         if (search) {
-            queryText += ` AND name ILIKE $1`;
+
             params.push(`%${search}%`);
-        }
-        if (studentId) {
-            queryText += ` AND student_id = $${params.length + 1}`;
-            params.push(parseInt(studentId));
+
+            conditions.push(`
+                name ILIKE $${params.length}
+            `);
         }
 
-        queryText += ` ORDER BY name`;
+        // Search by Student/Probate ID
+        if (studentId) {
+
+            params.push(parseInt(studentId));
+
+            conditions.push(`
+                probateid = $${params.length}
+            `);
+        }
+
+        // Add WHERE clause only if search conditions exist
+        if (conditions.length > 0) {
+
+            queryText += `
+                WHERE ${conditions.join(' AND ')}
+            `;
+        }
+
+        // Sorting
+        queryText += `
+            ORDER BY name
+        `;
+
+        console.log('Query:', queryText);
+        console.log('Params:', params);
 
         const result = await pool.query(queryText, params);
+
         res.json(result.rows);
+
     } catch (err) {
+
         console.error(err);
-        res.status(500).json({ error: 'Database error' });
+
+        res.status(500).json({
+            error: 'Database error'
+        });
     }
 });
 

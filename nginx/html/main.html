@@ -4,123 +4,219 @@
 <head>
     <title>USAFA Honor Probation Tracker</title>
     <link rel="stylesheet" href="main.css">
-</head>
 
+    <style>
+        .pagination {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .pagination button {
+            padding: 8px 16px;
+            margin: 0 10px;
+            cursor: pointer;
+        }
+
+        #pageInfo {
+            font-weight: bold;
+        }
+    </style>
+</head>
 
 <body>
 
     <div>
-    <header class="header">
-        <name>USAFA Honor Probation Tracker</name>
-        <a href="login.html" class = "logout">Logout</a>
-        <a href="addProbate.html" class = addMember>Add Probate</a>
-        <p class="honorCode">WE WILL NOT LIE, STEAL, OR CHEAT, NOR TOLERATE AMONG US ANYONE WHO DOES</p>
-    </header>
+        <header class="header">
+            <name>USAFA Honor Probation Tracker</name>
+            <a href="login.html" class="logout">Logout</a>
+            <a href="addProbate.html" class="addMember">Add Probate</a>
+            <p class="honorCode">
+                WE WILL NOT LIE, STEAL, OR CHEAT, NOR TOLERATE AMONG US ANYONE WHO DOES
+            </p>
+        </header>
     </div>
-
 
     <main>
 
         <div class="container">
             <div class="lookup">
 
-    <div class="search-container">
-        <label class="searchStyle">Last Name: </label>
-        <input type="text" id="nameSearch" placeholder="Last Name">
-        
-        <p class="searchStyle">or</p>
-        
-        <label class="searchStyle">Student ID: </label>
-        <input type="number" id="studentId" placeholder="Student ID">
-        
-        <button onclick="searchProbates()">Search</button>
-        <button onclick="clearSearch()">Clear</button>
-    </div>
+                <div class="search-container">
+                    <label class="searchStyle">First or Last Name: </label>
+                    <input type="text" id="nameSearch" placeholder="Last Name">
 
-    <table>
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>Probate ID</th>
-                <th>Start Date</th>
-                <th>End Date</th>
-                <th>Squad</th>
-                <th>Class Year</th>
-            </tr>
-        </thead>
-        <tbody id="probateBody"></tbody>
-    </table>
+                    <p class="searchStyle">or</p>
 
-    <script>
-    async function searchProbates() {
-        const name = document.getElementById('nameSearch').value.trim();
-        const studentId = document.getElementById('studentId').value.trim();
-        
-        let url = '/api/probates';
-        
-        if (name || studentId) {
-            url += '?';
-            if (name) url += `search=${encodeURIComponent(name)}&`;
-            if (studentId) url += `studentId=${studentId}`;
-        }
+                    <label class="searchStyle">Student ID: </label>
+                    <input type="number" id="studentId" placeholder="Student ID">
 
-        try {
-            console.log('Fetching from:', url);   // Debug
-            
-            const response = await fetch(url);
-            console.log('Response status:', response.status);
-            
-            if (!response.ok) {
-                throw new Error(`HTTP ${response.status}`);
-            }
-            
-            const data = await response.json();
-            console.log('Data received:', data);   // Debug
-            
-            renderTable(data);
-        } catch (error) {
-            console.error('Fetch error:', error);
-            alert('Error loading probates: ' + error.message);
-        }
-    }
+                    <button onclick="searchProbates()">Search</button>
+                    <button onclick="clearSearch()">Clear</button>
+                </div>
 
-    function renderTable(rows) {
-        const tbody = document.getElementById('probateBody');
-        tbody.innerHTML = '';
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Probate ID</th>
+                            <th>Start Date</th>
+                            <th>End Date</th>
+                            <th>Squad</th>
+                            <th>Class Year</th>
+                        </tr>
+                    </thead>
 
-        if (!rows || rows.length === 0) {
-            tbody.innerHTML = `<tr><td colspan="6" style="text-align:center; padding:20px;">No results found</td></tr>`;
-            return;
-        }
+                    <tbody id="probateBody"></tbody>
+                </table>
 
-        rows.forEach(row => {
-            const tr = document.createElement('tr');
-            tr.innerHTML = `
-                <td>${row.name || ''}</td>
-                <td>${row.probateid || ''}</td>
-                <td>${row.startdate ? row.startdate.substring(0,10) : ''}</td>
-                <td>${row.enddate ? row.enddate.substring(0,10) : ''}</td>
-                <td>${row.squad || ''}</td>
-                <td>${row.classyear || ''}</td>
-            `;
-            tbody.appendChild(tr);
-        });
-    }
+                <!-- Pagination Controls -->
+                <div class="pagination">
+                    <button onclick="prevPage()">Previous</button>
 
-    function clearSearch() {
-        document.getElementById('nameSearch').value = '';
-        document.getElementById('studentId').value = '';
-        searchProbates();
-    }
+                    <span id="pageInfo"></span>
 
-    // Auto load when page opens
-    window.onload = searchProbates;
-</script>
+                    <button onclick="nextPage()">Next</button>
+                </div>
 
-</div>
+                <script>
+
+                    let allRows = [];
+                    let currentPage = 1;
+                    const rowsPerPage = 10;
+
+                    async function searchProbates() {
+                        const name = document.getElementById('nameSearch').value.trim();
+                        const studentId = document.getElementById('studentId').value.trim();
+
+                        let url = '/api/probates';
+
+                        if (name || studentId) {
+                            url += '?';
+
+                            if (name)
+                                url += `search=${encodeURIComponent(name)}&`;
+
+                            if (studentId)
+                                url += `studentId=${studentId}`;
+                        }
+
+                        try {
+
+                            console.log('Fetching from:', url);
+
+                            const response = await fetch(url);
+
+                            console.log('Response status:', response.status);
+
+                            if (!response.ok) {
+                                throw new Error(`HTTP ${response.status}`);
+                            }
+
+                            const data = await response.json();
+
+                            console.log('Data received:', data);
+
+                            allRows = data;
+                            currentPage = 1;
+
+                            renderTable();
+
+                        } catch (error) {
+
+                            console.error('Fetch error:', error);
+
+                            alert('Error loading probates: ' + error.message);
+                        }
+                    }
+
+                    function renderTable() {
+
+                        const tbody = document.getElementById('probateBody');
+
+                        tbody.innerHTML = '';
+
+                        if (!allRows || allRows.length === 0) {
+
+                            tbody.innerHTML = `
+                                <tr>
+                                    <td colspan="6" style="text-align:center; padding:20px;">
+                                        No results found
+                                    </td>
+                                </tr>
+                            `;
+
+                            document.getElementById('pageInfo').innerText = '';
+
+                            return;
+                        }
+
+                        const start = (currentPage - 1) * rowsPerPage;
+                        const end = start + rowsPerPage;
+
+                        const pageRows = allRows.slice(start, end);
+
+                        pageRows.forEach(row => {
+
+                            const tr = document.createElement('tr');
+
+                            tr.innerHTML = `
+                                <td>${row.name || ''}</td>
+                                <td>${row.probateid || ''}</td>
+                                <td>${row.startdate ? row.startdate.substring(0,10) : ''}</td>
+                                <td>${row.enddate ? row.enddate.substring(0,10) : ''}</td>
+                                <td>${row.squad || ''}</td>
+                                <td>${row.classyear || ''}</td>
+                            `;
+
+                            tbody.appendChild(tr);
+                        });
+
+                        const totalPages = Math.ceil(allRows.length / rowsPerPage);
+
+                        document.getElementById('pageInfo').innerText =
+                            `Page ${currentPage} of ${totalPages}`;
+                    }
+
+                    function nextPage() {
+
+                        const totalPages = Math.ceil(allRows.length / rowsPerPage);
+
+                        if (currentPage < totalPages) {
+
+                            currentPage++;
+
+                            renderTable();
+                        }
+                    }
+
+                    function prevPage() {
+
+                        if (currentPage > 1) {
+
+                            currentPage--;
+
+                            renderTable();
+                        }
+                    }
+
+                    function clearSearch() {
+
+                        document.getElementById('nameSearch').value = '';
+                        document.getElementById('studentId').value = '';
+
+                        searchProbates();
+                    }
+
+                    // Auto load when page opens
+                    window.onload = searchProbates;
+
+                </script>
+
+            </div>
         </div>
 
     </main>
 
 </body>
+
 </html>
