@@ -12,7 +12,9 @@ async function register(event) {
 
     const userData = {
         username: formData.get("username"),
-        password: formData.get("password")
+        password: formData.get("password"),
+        role: formData.get("role")
+
     };
 
     const jsonBody = JSON.stringify(userData);

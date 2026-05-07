@@ -5,4 +5,6 @@ C/Ryan:
 
 C/Thomas: No Help Received
 
-C/Milio: Used online HTML code examples
+C/Milio: Used online HTML code examples, I copied lots of code
+from L27 code, including backend as well as modified code for
+use of the project

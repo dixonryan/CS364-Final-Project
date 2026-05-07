@@ -3,7 +3,8 @@ CREATE TABLE IF NOT EXISTS users (
     id SERIAL PRIMARY KEY,
     username VARCHAR(100) NOT NULL,
     hash CHAR(128) NOT NULL,
-    salt CHAR(32) NOT NULL
+    salt CHAR(32) NOT NULL,
+    role VARCHAR(10) CHECK (role IN ('user', 'admin')) NOT NULL DEFAULT 'user'
 );
 
 --select * from users;
